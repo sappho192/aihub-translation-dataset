@@ -1,5 +1,8 @@
 import os
 from AiHub.AiHubDataset027 import AiHubDataset027
+from AiHub.AiHubDataset053 import AiHubDataset053
+from AiHub.AiHubDataset054 import AiHubDataset054
+from AiHub.AiHubDataset055 import AiHubDataset055
 
 AIHUB_ROOT = "K:\\DATASET\\aihub"
 
@@ -17,3 +20,11 @@ DATASET_KoJaTr = os.path.join(AIHUB_ROOT, DATASET_NAME_KOJATR)
 dataset027 = AiHubDataset027(DATASET_NAME_027, DATASET_027)
 print(f'Loaded {dataset027.get_dataset_name()}')
 
+dataset053 = AiHubDataset053(DATASET_NAME_053, DATASET_053)
+print(f'Loaded {dataset053.get_dataset_name()}')
+
+dataset054 = AiHubDataset054(DATASET_NAME_054, DATASET_054)
+print(f'Loaded {dataset054.get_dataset_name()}')
+
+dataset055 = AiHubDataset055(DATASET_NAME_055, DATASET_055)
+print(f'Loaded {dataset055.get_dataset_name()}')
