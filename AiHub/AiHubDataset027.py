@@ -11,6 +11,12 @@ class AiHubDataset027(AiHubDatasetBase):
         super().__init__(dataset_name, dataset_root, dataset_train_root, dataset_val_root)
         self.make_dataset()
 
+    def get_dataset_train(self):
+        return self._dataset_train
+
+    def get_dataset_val(self):
+        return self._dataset_val
+
     def make_dataset(self):
         self._dataset_train = self.make_train_dataset()
         self._dataset_val = self.make_val_dataset()
@@ -55,14 +61,8 @@ class AiHubDataset027(AiHubDatasetBase):
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        translations = {}
+        translations = []
         for item in data:
-            translations[item["원문"]] = item["최종번역문"]
+            translations.append((item["원문"], item["최종번역문"]))
 
         return translations
-
-    def get_dataset_train(self):
-        return self._dataset_train
-
-    def get_dataset_val(self):
-        return self._dataset_val
