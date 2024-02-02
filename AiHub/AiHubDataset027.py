@@ -33,11 +33,26 @@ class AiHubDataset027(AiHubDatasetBase):
         overseaSalesJKJsonPath = os.path.join(overseaSalesRoot, "라벨링데이터_일한_해외영업_TTA품질검증_350000_training.json")
 
         # Read json file
-        usualLifeJKData = self.read_json(usualLifeJKJsonPath)
-        chatJKData = self.read_json(chatJKJsonPath)
-        overseaSalesJKData = self.read_json(overseaSalesJKJsonPath)
+        usualLifeJKData = self.read_json_jk(usualLifeJKJsonPath)
+        chatJKData = self.read_json_jk(chatJKJsonPath)
+        overseaSalesJKData = self.read_json_jk(overseaSalesJKJsonPath)
 
-        return [usualLifeJKData, chatJKData, overseaSalesJKData]
+        labeledKJDataRoot = os.path.join(self._dataset_train_root, "한일")
+        usualLifeDataRoot = os.path.join(labeledKJDataRoot, "일상생활")
+        chatDataRoot = os.path.join(labeledKJDataRoot, "채팅")
+        overseaSalesRoot = os.path.join(labeledKJDataRoot, "해외영업")
+
+        # Set json path
+        usualLifeKJJsonPath = os.path.join(usualLifeDataRoot, "라벨링데이터_한일_일상생활_TTA품질검증_250000_training.json")
+        chatKJJsonPath = os.path.join(chatDataRoot, "라벨링데이터_한일_채팅_TTA품질검증_150000_training.json")
+        overseaSalesKJJsonPath = os.path.join(overseaSalesRoot, "라벨링데이터_한일_해외영업_TTA품질검증_350000_training.json")
+
+        # Read json file
+        usualLifeKJData = self.read_json_kj(usualLifeKJJsonPath)
+        chatKJData = self.read_json_kj(chatKJJsonPath)
+        overseaSalesKJData = self.read_json_kj(overseaSalesKJJsonPath)
+
+        return [usualLifeJKData, chatJKData, overseaSalesJKData, usualLifeKJData, chatKJData, overseaSalesKJData]
 
     def make_val_dataset(self):
         labeledJKDataRoot = os.path.join(self._dataset_val_root, "일한")
@@ -51,18 +66,43 @@ class AiHubDataset027(AiHubDatasetBase):
         overseaSalesJKJsonPath = os.path.join(overseaSalesRoot, "라벨링데이터_일한_해외영업_TTA품질검증_350000_validation.json")
 
         # Read json file
-        usualLifeJKData = self.read_json(usualLifeJKJsonPath)
-        chatJKData = self.read_json(chatJKJsonPath)
-        overseaSalesJKData = self.read_json(overseaSalesJKJsonPath)
+        usualLifeJKData = self.read_json_jk(usualLifeJKJsonPath)
+        chatJKData = self.read_json_jk(chatJKJsonPath)
+        overseaSalesJKData = self.read_json_jk(overseaSalesJKJsonPath)
 
-        return [usualLifeJKData, chatJKData, overseaSalesJKData]
+        labeledKJDataRoot = os.path.join(self._dataset_val_root, "한일")
+        usualLifeDataRoot = os.path.join(labeledKJDataRoot, "일상생활")
+        chatDataRoot = os.path.join(labeledKJDataRoot, "채팅")
+        overseaSalesRoot = os.path.join(labeledKJDataRoot, "해외영업")
 
-    def read_json(self, json_path):
+        # Set json path
+        usualLifeKJJsonPath = os.path.join(usualLifeDataRoot, "라벨링데이터_한일_일상생활_TTA품질검증_250000_validation.json")
+        chatKJJsonPath = os.path.join(chatDataRoot, "라벨링데이터_한일_채팅_TTA품질검증_150000_validation.json")
+        overseaSalesKJJsonPath = os.path.join(overseaSalesRoot, "라벨링데이터_한일_해외영업_TTA품질검증_350000_validation.json")
+
+        # Read json file
+        usualLifeKJData = self.read_json_kj(usualLifeKJJsonPath)
+        chatKJData = self.read_json_kj(chatKJJsonPath)
+        overseaSalesKJData = self.read_json_kj(overseaSalesKJJsonPath)
+
+        return [usualLifeJKData, chatJKData, overseaSalesJKData, usualLifeKJData, chatKJData, overseaSalesKJData]
+
+    def read_json_jk(self, json_path):
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         translations = []
         for item in data:
             translations.append((item["원문"], item["최종번역문"]))
+
+        return translations
+
+    def read_json_kj(self, json_path):
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        translations = []
+        for item in data:
+            translations.append((item["최종번역문"], item["원문"]))
 
         return translations
