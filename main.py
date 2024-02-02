@@ -15,4 +15,5 @@ DATASET_NAME_KOJATR = "한국어-일본어 번역 말뭉치"
 DATASET_KoJaTr = os.path.join(AIHUB_ROOT, DATASET_NAME_KOJATR)
 
 dataset027 = AiHubDataset027(DATASET_NAME_027, DATASET_027)
-print(f'{dataset027.get_dataset_name()}')
+print(f'Loaded {dataset027.get_dataset_name()}')
+

@@ -28,3 +28,6 @@ class AiHubDatasetBase:
 
     def make_dataset(self):
         pass
+
+    def read_json(self, json_path):
+        pass
