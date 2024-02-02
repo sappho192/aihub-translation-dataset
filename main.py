@@ -1,5 +1,5 @@
 import os
-from AiHubDataset027 import AiHubDataset027
+from AiHub.AiHubDataset027 import AiHubDataset027
 
 AIHUB_ROOT = "K:\\DATASET\\aihub"
 
